@@ -2,7 +2,8 @@ import unittest
 import lab2Class
 import decor
 import MyJson
-#import lab2
+import random
+import lab2
 class Lab2Tests(unittest.TestCase):
     def test_lab2Class(self):
         vec=lab2Class.vector([1,2,3])
@@ -42,10 +43,22 @@ class Lab2Tests(unittest.TestCase):
         Dict2 = {'Hm': 'Kl'}
         self.assertEqual(MyJson.to_json(Dict),s1)
         self.assertEqual(MyJson.to_json(Dict2),s2)
-       # self.assertEqual(calc.mul(2, 5), 10)
-        
-   # def test_div(self):
-       # self.assertEqual(calc.div(8, 4), 2)
 
+        
+    def test_merge(self):
+        with open('nums.txt', 'w') as f:
+            f.writelines('{}\n'.format(random.randint(-100000, 100000)) for _ in range(50))
+        lab2.merge("nums.txt")
+        temp=100001
+        tempbool=True
+        with open('nums.txt', 'r') as f:
+            for lines in f:
+                if int(lines)<=int(temp):
+                    temp=lines
+                    continue
+                else:
+                    tempbool=False
+                    break;
+        self.assertFalse(tempbool)
 if __name__ == '__main__':
     unittest.main()
