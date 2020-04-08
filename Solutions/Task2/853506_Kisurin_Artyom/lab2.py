@@ -59,6 +59,8 @@ def merge(my_file):
         mid = cur_len // 2
         L = tempfile.TemporaryFile(delete=False)
         R = tempfile.TemporaryFile(delete=False)
+        L.close()
+        R.close()
         i = 1
         with open(my_file, 'r', encoding='utf-8') as g:
             with open(L.name, 'w', encoding='utf-8') as L:
