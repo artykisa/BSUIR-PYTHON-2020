@@ -5,12 +5,6 @@ import MyJson
 import random
 import lab2
 
-class Dog:
-    # A simple class
-    # attribute
-    attr1 = "mamal"
-    attr2 = "dog"
-
 class Lab2Tests(unittest.TestCase):
     def test_lab2Class(self):
         vec = lab2Class.vector([1, 2, 3])
