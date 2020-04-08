@@ -6,7 +6,6 @@ def len_of_file(filename):
     with open(filename) as f:
         for lines in f:
             i += 1
-        f.close()
     return i
 
 
@@ -17,7 +16,6 @@ def get_line(filename, num):
             if i == int(num):
                 return line
             i += 1
-        file1.close()
 
 
 def change_line_infile(filename1, num, str1):
@@ -31,14 +29,10 @@ def change_line_infile(filename1, num, str1):
                 else:
                     file2.write(lines)
                 i += 1
-            file1.close()
-            file2.close()
     with open(filename1, 'w') as file1:
         with open(temp.__name__, 'r') as file2:
             for lines in file2:
                 file1.write(lines)
-            file1.close()
-            file2.close()
 
 
 def set_value(filename1, filename2, num1, num2):
@@ -49,7 +43,6 @@ def set_value(filename1, filename2, num1, num2):
             if j == num2:
                 str2 = lines
             j += 1
-        file2.close()
     change_line_infile(filename1, num1, str2)
 
 
@@ -71,9 +64,6 @@ def merge(my_file):
                         else:
                             R.write(line)
                         i += 1
-                    L.close()
-                    R.close()
-                    g.close()
         merge(L.name)
         merge(R.name)
         i = j = k = 0
