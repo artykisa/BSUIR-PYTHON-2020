@@ -79,7 +79,4 @@ def merge(myfile):
             setvalue(myfile,R.name,k,j)
             j+=1
             k+=1
-if __name__ == "__main__":
-    print("Start sort...")
-    merge("nums.txt")
-    print("Sort completed")
+
