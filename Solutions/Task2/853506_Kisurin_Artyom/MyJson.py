@@ -7,19 +7,20 @@ def list_or_tuple_tojson(obj, level):
     return ret
 
 def dict_tojson(obj: dict, level):
-    json=""
+    json="\n{\n"
     for key, value in list(obj.items()):
         if key!=list(obj.keys())[-1]:
              json += '\t' * level + '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + ',\n'
         else:
             json += '\t' * level + '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + '\n'
+    json+="}"
     return json
 
 def indict_to_json(obj:dict,level):
      ret=""
     
      if isinstance(obj, dict):
-        ret = dict_tojson(value, level)
+        ret = dict_tojson(obj, level)
 
      elif isinstance(obj, list) or isinstance(obj, tuple):
         ret = list_or_tuple_tojson(obj, level)
@@ -59,6 +60,3 @@ def into_json(obj:object,level):
     return json
 def to_json(obj: object):  
     return into_json(obj, 0)
-if __name__ == "__main__":
-    Dict = {'Name': 'Geeks', 1: [1, 2, 3, 4]} 
-    print(to_json(Dict))

@@ -107,27 +107,3 @@ class vector:
            j+=1
         ret=math.sqrt(temp)
         return ret
-
-if __name__ == "__main__":
-    vec=vector([1,2,3])
-    vec2=vector([5,4,6,7])
-    vec3=vector([1,2,3])
-    print(vector.scalar(vec,vec3))
-    print(vector.scalar(vec,vec2))
-    print(vec.Equal(vec3))
-    print(vec.Equal(vec2))
-    print(vec.tostring())
-    print(vec.getbyindex(2))
-    print(vec.getbyindex(10))
-    vec.multconst(2)
-    print(vec.vec)
-    print(vector.add(vec,vec2))
-    print(vector.sub(vec,vec2))
-    print(vec3.lengh())
-    try:
-        a=0
-        if a==0:
-            raise MyError("You give negative!")
-        print("dfdf")
-    except MyError as mr:
-        print(mr)
