@@ -1,19 +1,19 @@
 def list_or_tuple_tojson(obj, level):
-    ret = '\n[\n'
+    ret = '['
     for i in obj[:-1]:
-        ret += '\t' * level + indict_to_json(i, level + 1) + ',\n'
-    ret += '\t' * level + indict_to_json(obj[-1], level + 1)
-    ret += '\n' + '\t' * (level - 1) + ']'
+        ret += indict_to_json(i, level + 1) + ', '
+    ret += indict_to_json(obj[-1], level + 1)
+    ret += ']'
     return ret
 
 
 def dict_tojson(obj: dict, level):
-    json = "\n{\n"
+    json = "{"
     for key, value in list(obj.items()):
         if key != list(obj.keys())[-1]:
-            json += '\t' * level + '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + ',\n'
+            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + ', '
         else:
-            json += '\t' * level + '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + '\n'
+            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1))
     json += "}"
     return json
 
@@ -27,6 +27,12 @@ def indict_to_json(obj: dict, level):
     elif isinstance(obj, list) or isinstance(obj, tuple):
         ret = list_or_tuple_tojson(obj, level)
 
+    elif isinstance(obj, bool):
+        if obj:
+            ret = "true"
+        else:
+            ret = "false"
+
     elif isinstance(obj, int) or isinstance(obj, float) or isinstance(obj, complex):
         ret = str(obj)
 
@@ -36,11 +42,6 @@ def indict_to_json(obj: dict, level):
     elif obj is None:
         ret = 'null'
 
-    elif isinstance(obj, bool):
-        if obj:
-            ret = "True"
-        else:
-            ret = "False"
     else:
         ret += into_json(obj, level)
 
@@ -48,16 +49,14 @@ def indict_to_json(obj: dict, level):
 
 
 def into_json(obj: object, level):
-    json = "{\n"
+    json = "{"
     if isinstance(obj, dict):
         dict1 = obj
-    else:
-        dict1 = vars(obj)
     for key, value in list(dict1.items()):
         if key != list(dict1.keys())[-1]:
-            json += '\t' * level + '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + ',\n'
+            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + ', '
         else:
-            json += '\t' * level + '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + '\n'
+            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1))
 
     json += "}"
     return json

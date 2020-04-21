@@ -1,4 +1,5 @@
 import tempfile
+import linecache
 
 
 def len_of_file(filename):
@@ -7,15 +8,6 @@ def len_of_file(filename):
         for lines in f:
             i += 1
     return i
-
-
-def get_line(filename, num):
-    i = 0
-    with open(filename, 'r', encoding='utf-8') as file1:
-        for line in file1:
-            if i == int(num):
-                return line
-            i += 1
 
 
 def change_line_infile(filename1, num, str1):
@@ -68,7 +60,7 @@ def merge(my_file):
         merge(R.name)
         i = j = k = 0
         while i < len_of_file(L.name) and j < len_of_file(R.name):
-            if float(get_line(L.name, i)) < float(get_line(R.name, j)):
+            if float(linecache.getline(L.name, i+1)) < float(linecache.getline(R.name, j+1)):
                 set_value(my_file, L.name, k, i)
                 i += 1
             else:
@@ -83,9 +75,3 @@ def merge(my_file):
             set_value(my_file, R.name, k, j)
             j += 1
             k += 1
-
-
-if __name__ == "__main__":
-    print("Start sort...")
-    merge("nums.txt")
-    print("Sort completed")

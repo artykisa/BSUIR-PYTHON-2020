@@ -1,17 +1,19 @@
-mydict={};
-def toup(name):
-        return name.upper()
-def cached(func):
-        def infunc(*args):           
-           value=mydict.get(args,"no value")
-           if value=="no value":
-               value=func(*args)
-               mydict.update({args:value});
-           return value
-        return infunc 
-decorator = cached(toup)
-if __name__ == "__main__":
-   print(decorator("Artyom"))
-   print(decorator("Artyom"))
-   print(decorator("Artyom"))
+mydict = {};
 
+
+def to_up(name):
+    return name.upper()
+
+
+def cached(func):
+    def in_func(*args, **kwargs):
+        value = mydict.get(args+tuple(sorted(kwargs.items())), "no value")
+        if value == "no value":
+            value = func(*args+tuple(sorted(kwargs.items())))
+            mydict.update({args+tuple(sorted(kwargs.items())): value})
+        return value
+
+    return in_func
+
+
+decorator = cached(to_up)
