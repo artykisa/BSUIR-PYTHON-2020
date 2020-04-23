@@ -8,4 +8,4 @@ task3(lab2Class.py) - класс вектор, в котором для вект
 task4(decor.py) - декоратор @cached, данные хранятся в словаре, где ключем является входные значения, а value - это что бы выдала функция при таких значениях
 
 
-task5(UnitTest.py) - тест, запускать как "coverage run -m pytest.py UnitTest.py"
+task5(UnitTest.py) - тест, запускать как "coverage run -m unittest UnitTest.py"
