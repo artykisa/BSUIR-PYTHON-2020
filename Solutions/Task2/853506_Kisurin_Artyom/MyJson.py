@@ -1,31 +1,21 @@
-def list_or_tuple_tojson(obj, level):
+def list_or_tuple_tojson(obj):
     ret = '['
     for i in obj[:-1]:
-        ret += indict_to_json(i, level + 1) + ', '
-    ret += indict_to_json(obj[-1], level + 1)
+        ret += indict_to_json(i) + ', '
+    ret += indict_to_json(obj[-1])
     ret += ']'
     return ret
 
 
-def dict_tojson(obj: dict, level):
-    json = "{"
-    for key, value in list(obj.items()):
-        if key != list(obj.keys())[-1]:
-            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + ', '
-        else:
-            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1))
-    json += "}"
-    return json
 
-
-def indict_to_json(obj: dict, level):
+def indict_to_json(obj: dict):
     ret = ""
 
     if isinstance(obj, dict):
-        ret = dict_tojson(obj, level)
+        ret = into_json(obj)
 
     elif isinstance(obj, list) or isinstance(obj, tuple):
-        ret = list_or_tuple_tojson(obj, level)
+        ret = list_or_tuple_tojson(obj)
 
     elif isinstance(obj, bool):
         if obj:
@@ -42,25 +32,22 @@ def indict_to_json(obj: dict, level):
     elif obj is None:
         ret = 'null'
 
-    else:
-        ret += into_json(obj, level)
-
     return ret
 
 
-def into_json(obj: object, level):
+def into_json(obj: object):
     json = "{"
     if isinstance(obj, dict):
         dict1 = obj
     for key, value in list(dict1.items()):
         if key != list(dict1.keys())[-1]:
-            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1)) + ', '
+            json += '"{}": {}'.format(str(key), indict_to_json(value)) + ', '
         else:
-            json += '"{}": {}'.format(str(key), indict_to_json(value, level + 1))
+            json += '"{}": {}'.format(str(key), indict_to_json(value))
 
     json += "}"
     return json
 
 
 def to_json(obj: object):
-    return into_json(obj, 0)
+    return into_json(obj)

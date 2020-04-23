@@ -14,6 +14,7 @@ class Lab2Tests(unittest.TestCase):
         vec3 = lab2Class.vector([1, 2, 3])
         vec4 = lab2Class.vector([1, 2, 3, 4])
         self.assertEqual(vec == vec2, False)
+        self.assertEqual(vec == vec3, True)
         self.assertEqual(vec == vec4, False)
         self.assertEqual((vec + vec3).vec, [2, 4, 6])
         self.assertEqual((vec - vec3).vec, [0, 0, 0])
@@ -27,6 +28,7 @@ class Lab2Tests(unittest.TestCase):
         self.assertEqual(None, vec - vec4)
         self.assertEqual(None, lab2Class.vector.scalar(vec, vec4))
         self.assertEqual((vec3*1).vec, vec3.vec)
+        self.assertEqual(len(vec), 3)
 
     def test_decor(self):
         self.assertEqual(decor.decorator("Artyom"), "ARTYOM")
