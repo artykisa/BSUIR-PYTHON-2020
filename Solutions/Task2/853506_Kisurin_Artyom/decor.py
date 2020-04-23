@@ -1,4 +1,4 @@
-mydict = {};
+mydict = {}
 
 
 def to_up(name):
